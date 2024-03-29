@@ -31,12 +31,12 @@ def main():
     count = 0  # keep track of inputs in stdin
 
     try:
-        for word in sys.stdin:
+        for line in sys.stdin:
             count += 1
-            word = word.rstrip().rsplit(None, 2)  # Fix typo here: rsplit instead of rplit
-            if len(word) < 3:  # Changed to 3, since we want at least IP, status, and byte
+            line = line.rsplit(None, 2)
+            if len(line) < 2:
                 continue
-            status, byte = word[-2], word[-1]  # Changed to use negative indices for correct extraction
+            status, byte = line[1], line[2]
             if status in status_code:
                 status_code[status] += 1
             try:
@@ -44,9 +44,12 @@ def main():
             except ValueError:
                 continue
             if count % 10 == 0:
-                print_func(total_size, status_code)
-        print_func(total_size, status_code)
+                print_dct(total_size, status_code)
+        print_dct(total_size, status_code)
 
     except KeyboardInterrupt:
-        print_func(total_size, status_code)
+        print_dct(total_size, status_code)
         raise
+
+if __name__ == "__main__":
+    main()
