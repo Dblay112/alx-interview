@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-interpreter used
+interpreter used.
 """
 import sys
 
