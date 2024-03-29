@@ -44,11 +44,11 @@ def main():
             except ValueError:
                 continue
             if count % 10 == 0:
-                print_dct(total_size, status_code)
-        print_dct(total_size, status_code)
+                print_func(total_size, status_code)
+        print_func(total_size, status_code)
 
     except KeyboardInterrupt:
-        print_dct(total_size, status_code)
+        print_func(total_size, status_code)
         raise
 
 if __name__ == "__main__":
