@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""interpreter used/location"""
+"""interpreter used/location."""
 import sys
 
 
