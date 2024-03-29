@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-"""interpreter used/location."""
+"""
+interpreter used
+"""
 import sys
 
 
-def print_func(total_size, status_code):
+def print_funct(total_size, status_code):
     """
-    function to print file size, total size, and
-    status code
+    function to print file size and status code
     """
     print("File size: {}".format(total_size))
     for key, value in sorted(status_code.items()):
@@ -15,7 +16,9 @@ def print_func(total_size, status_code):
 
 
 def main():
-    """main function to use, contains status code etc"""
+    """
+    Main function containing status code etc.
+    """
     status_code = {
         "200": 0,
         "301": 0,
@@ -26,10 +29,8 @@ def main():
         "405": 0,
         "500": 0
     }
-
     total_size = 0
-    count = 0  # keep track of inputs in stdin
-
+    count = 0
     try:
         for line in sys.stdin:
             count += 1
@@ -44,12 +45,13 @@ def main():
             except ValueError:
                 continue
             if count % 10 == 0:
-                print_func(total_size, status_code)
-        print_func(total_size, status_code)
+                print_funct(total_size, status_code)
+        print_funct(total_size, status_code)
 
     except KeyboardInterrupt:
-        print_func(total_size, status_code)
+        print_funct(total_size, status_code)
         raise
+
 
 if __name__ == "__main__":
     main()
