@@ -5,21 +5,29 @@
 def validUTF8(data):
   """function that determines if a given
   data set represents a valid UTF-8 encoding"""
-  i = 0
-  for num in data:
-    byte = num & 0xFF
-    if i > 0 and (byte & 0xC0) != 0x80:
-      return False
-    if (byte & 0x80) == 0:
-      i = 0
-    elif (byte & 0xE0) == 0xC0:
-      i = 1
-    elif (byte & 0xF0) == 0xE0:
-      i = 2
-    elif (byte & 0xF8) == 0xF0:
-      i = 3
-    else:
-      return False
-    if i > 0 and i < data.index(byte) + 1 - len(data):
-      return False
-  return i == 0
+  if len(data) == 0:
+        return True
+
+    length = len(data)
+    word = 7
+    byte = 0
+    num = data[0]
+    while byte < 4:
+        shift = word - byte
+        bit = num >> shift & 1
+        if not bit:
+            break
+        byte += 1
+    shift = word - byte
+    bit = num >> shift & 1
+    if byte == 1 or byte > length or bit:
+        return False
+    if byte == 0:
+        return validUTF8(data[1:])
+
+    for i in range(1, byte):
+        num = data[i]
+        shift = word - 1
+        if not (num >> word & 1) or (num >> shift & 1):
+            return False
+    return validUTF8(data[i + 1:])
