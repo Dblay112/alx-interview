@@ -1,11 +1,14 @@
 #!/usr/bin/python3
-"""utf-8 validator module."""
+"""
+utf validator module
+"""
 
 
 def validUTF8(data):
-  """function that determines if a given
-  data set represents a valid UTF-8 encoding"""
-  if len(data) == 0:
+    """
+    function to validate if data is valid utf-8 encoding
+    """
+    if len(data) == 0:
         return True
 
     length = len(data)
