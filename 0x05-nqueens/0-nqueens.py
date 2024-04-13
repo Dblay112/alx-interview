@@ -1,13 +1,17 @@
 #!/usr/bin/python3
 """
+<<<<<<< HEAD
 Module.
+=======
+Module solve n quens problem
+>>>>>>> bee732e297dd696b056fc13a75ec1792b269bea3
 """
 import sys
 
 
 def is_valid(board, col):
     """
-    function to validate correct chessboard
+    Checks is the given board is valid till column col
     """
     row = board[col]
     for i in range(col):
@@ -18,7 +22,7 @@ def is_valid(board, col):
 
 def main(n):
     """
-    main function
+    Print every possible solution for the n quens problem
     """
     board = [-1 for _ in range(n)]
 
