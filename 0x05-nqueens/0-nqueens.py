@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module
+Module.
 """
 import sys
 
