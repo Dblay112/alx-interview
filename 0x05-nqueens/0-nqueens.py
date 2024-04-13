@@ -25,7 +25,7 @@ def main(n):
     board[0] = 0
     i = 0
     while True:
-        if is_valid(board, i):
+        if chessboard(board, i):
             if i == n - 1:
                 lst = [[i, n] for i, n in enumerate(board)]
                 print(lst)
