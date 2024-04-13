@@ -1,96 +1,63 @@
 #!/usr/bin/python3
-"""module"""
+"""
+Module
+"""
 import sys
 
 
-def print_board(board):
-    """ print_board
-    Args:
-        board - list of list with length sys.argv[1]
+def is_valid(board, col):
     """
-    new_list = []
-    for i, row in enumerate(board):
-        value = []
-        for j, col in enumerate(row):
-            if col == 1:
-                value.append(i)
-                value.append(j)
-        new_list.append(value)
-
-    print(new_list)
-
-
-def isSafe(board, row, col, number):
-    """ 
+    docs
     """
-
+    row = board[col]
     for i in range(col):
-        if board[row][i] == 1:
+        if board[i] == row or col - i == abs(row - board[i]):
             return False
-
-    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
-        if board[i][j] == 1:
-            return False
-
-    for i, j in zip(range(row, number, 1), range(col, -1, -1)):
-        if board[i][j] == 1:
-            return False
-
     return True
 
 
-def solveNQUtil(board, col, number):
+def main(n):
     """
+    docs
     """
+    board = [-1 for _ in range(n)]
 
-    if (col == number):
-        print_board(board)
-        return True
-    res = False
-    for i in range(number):
-
-        if (isSafe(board, i, col, number)):
-            board[i][col] = 1
-
-            res = solveNQUtil(board, col + 1, number) or res
-
-            board[i][col] = 0
-
-    return res
-
-
-def solve(number):
-    """ 
-    """
-    board = [[0 for i in range(number)]for i in range(number)]
-
-    if not solveNQUtil(board, 0, number):
-        return False
-
-    return True
-
-
-def validate(args):
-    """
-    """
-    if (len(args) == 2):
-        try:
-            number = int(args[1])
-        except Exception:
-            print("N must be a number")
-            exit(1)
-        if number < 4:
-            print("N must be at least 4")
-            exit(1)
-        return number
-    else:
-        print("Usage: nqueens N")
-        exit(1)
+    board[0] = 0
+    i = 0
+    while True:
+        if is_valid(board, i):
+            if i == n - 1:
+                lst = [[i, n] for i, n in enumerate(board)]
+                print(lst)
+                board[i] = -1
+                i -= 1
+            else:
+                i += 1
+        else:
+            if board[i] >= n - 1:
+                board[i] = -1
+                i -= 1
+        while board[i] >= n - 1 and i > 0:
+            board[i] = -1
+            i -= 1
+        if board[i] >= n - 1 and i == 0:
+            break
+        board[i] += 1
 
 
 if __name__ == "__main__":
-    """ Main method
-    """
+    argv = sys.argv
+    min_size = 4
 
-    number = validate(sys.argv)
-    solve(number)
+    if (len(argv) != 2):
+        print("Usage: nqueens N")
+        sys.exit(1)
+    try:
+        n = int(argv[1])
+        if n < min_size:
+            print("N must be at least 4")
+            sys.exit(1)
+        main(n)
+    except ValueError:
+        print("N must be a number")
+        sys.exit(1)
