@@ -5,7 +5,7 @@ Module
 import sys
 
 
-def chessboard(board, col):
+def is_valid(board, col):
     """
     function to validate correct chessboard
     """
@@ -25,7 +25,7 @@ def main(n):
     board[0] = 0
     i = 0
     while True:
-        if chessboard(board, i):
+        if is_valid(board, i):
             if i == n - 1:
                 lst = [[i, n] for i, n in enumerate(board)]
                 print(lst)
