@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module solve n quens problem
+Module
 """
 import sys
 
